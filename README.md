@@ -1,4 +1,4 @@
-Zeus2维护者：<a href="mailto:yangf.sky@gmail.com" target="_blank">杨飞</a>  
+Zeus2维护者：<a href="mailto:yangf.sky@gmail.com">杨飞</a>  
 
 Zeus1维护者：<a href="http://weibo.com/2482348040/" target="_blank">淘宝周方</a>  
 ##宙斯(zeus)是什么
