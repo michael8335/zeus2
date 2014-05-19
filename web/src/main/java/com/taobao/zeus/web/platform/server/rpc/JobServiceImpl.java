@@ -392,10 +392,13 @@ public class JobServiceImpl implements JobService {
 	public void run(String jobId, int type) throws GwtException {
 		TriggerType triggerType = null;
 		JobDescriptor jobDescriptor=null;
+		ExecuteKind kind = null;
 		if (type == 1) {
 			triggerType = TriggerType.MANUAL;
+			kind = ExecuteKind.ManualKind;
 		} else if (type == 2) {
 			triggerType = TriggerType.MANUAL_RECOVER;
+			kind = ExecuteKind.ScheduleKind;
 		}
 		if (!permissionManager.hasJobPermission(LoginUser.getUser().getUid(),
 				jobId)) {
@@ -416,12 +419,7 @@ public class JobServiceImpl implements JobService {
 		history.setTimezone(jobDescriptor.getTimezone());
 		history.setExecuteHost(jobDescriptor.getHost());
 		jobHistoryManager.addJobHistory(history);
-		ExecuteKind kind = null;
-		if (triggerType == TriggerType.MANUAL) {
-			kind = ExecuteKind.ManualKind;
-		} else if (triggerType == TriggerType.MANUAL_RECOVER) {
-			kind = ExecuteKind.ScheduleKind;
-		}
+		
 		try {
 			worker.executeJobFromWeb(kind, history.getId());
 		} catch (Exception e) {

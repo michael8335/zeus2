@@ -619,9 +619,9 @@ public class Master {
 	}
 
 	public JobHistory run(JobHistory history) {
-		JobElement element = new JobElement(history.getId(), history.getExecuteHost());
-		history.setStatus(com.taobao.zeus.model.JobStatus.Status.RUNNING);
 		String jobId = history.getJobId();
+		JobElement element = new JobElement(jobId, history.getExecuteHost());
+		history.setStatus(com.taobao.zeus.model.JobStatus.Status.RUNNING);
 		if (history.getTriggerType() == TriggerType.MANUAL_RECOVER) {
 			for (JobElement e : new ArrayList<JobElement>(context.getQueue())) {
 				if (e.getJobID().equals(jobId)) {
