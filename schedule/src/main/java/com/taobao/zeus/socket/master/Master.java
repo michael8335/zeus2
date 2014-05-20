@@ -88,6 +88,7 @@ public class Master {
 				try {
 					scan();
 				} catch (Exception e) {
+					log.error("get job from queue failed!", e);
 				}
 			}
 		}, 0, 3, TimeUnit.SECONDS);
@@ -175,7 +176,7 @@ public class Master {
 		}
 		
 		if (!context.getDebugQueue().isEmpty()) {
-			final JobElement e = context.getManualQueue().poll();
+			final JobElement e = context.getDebugQueue().poll();
 			MasterWorkerHolder selectWorker = getRunableWorker(e.getHost());
 			if (selectWorker == null) {
 				context.getDebugQueue().offer(e);
@@ -619,9 +620,9 @@ public class Master {
 	}
 
 	public JobHistory run(JobHistory history) {
-		JobElement element = new JobElement(history.getId(), history.getExecuteHost());
-		history.setStatus(com.taobao.zeus.model.JobStatus.Status.RUNNING);
 		String jobId = history.getJobId();
+		JobElement element = new JobElement(jobId, history.getExecuteHost());
+		history.setStatus(com.taobao.zeus.model.JobStatus.Status.RUNNING);
 		if (history.getTriggerType() == TriggerType.MANUAL_RECOVER) {
 			for (JobElement e : new ArrayList<JobElement>(context.getQueue())) {
 				if (e.getJobID().equals(jobId)) {
