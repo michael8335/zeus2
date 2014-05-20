@@ -41,9 +41,9 @@
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-		<property name="url" value="jdbc:mysql://192.168.1.182:3306/zeus2?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;autoReconnect=true&amp;autoReconnectForPools=true"/>
-		<property name="username" value="ptmind"/>
-		<property name="password" value="ptmind2012"/>
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/zeus2?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;autoReconnect=true&amp;autoReconnectForPools=true"/>
+		<property name="username" value="root"/>
+		<property name="password" value="root"/>
 		<property name="maxActive" value="20" />
 		<property name="initialSize" value="3" />
 		<property name="maxWait" value="60000" />
