@@ -88,6 +88,7 @@ public class Master {
 				try {
 					scan();
 				} catch (Exception e) {
+					log.error("get job from queue failed!", e);
 				}
 			}
 		}, 0, 3, TimeUnit.SECONDS);
@@ -175,7 +176,7 @@ public class Master {
 		}
 		
 		if (!context.getDebugQueue().isEmpty()) {
-			final JobElement e = context.getManualQueue().poll();
+			final JobElement e = context.getDebugQueue().poll();
 			MasterWorkerHolder selectWorker = getRunableWorker(e.getHost());
 			if (selectWorker == null) {
 				context.getDebugQueue().offer(e);
