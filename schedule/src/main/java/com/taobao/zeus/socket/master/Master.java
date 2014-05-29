@@ -652,6 +652,7 @@ public class Master {
 			context.getJobHistoryManager().updateJobHistoryLog(history.getId(),
 					history.getLog().getContent());
 			if (history.getTriggerType() == TriggerType.MANUAL) {
+				element.setJobID(history.getId());
 				context.getManualQueue().offer(element);
 			} else {
 				JobStatus js = context.getGroupManager().getJobStatus(
