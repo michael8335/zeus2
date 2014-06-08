@@ -1,34 +1,22 @@
 package com.taobao.zeus.jobs.sub;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-
 import org.apache.commons.io.IOUtils;
-import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.Path;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
-import com.google.common.io.Files;
 import com.taobao.zeus.jobs.JobContext;
 import com.taobao.zeus.jobs.ProcessJob;
-import com.taobao.zeus.jobs.sub.conf.ConfUtil;
 import com.taobao.zeus.model.FileDescriptor;
 import com.taobao.zeus.store.FileManager;
-import com.taobao.zeus.util.Environment;
 import com.taobao.zeus.util.PropertyKeys;
 
 /**
