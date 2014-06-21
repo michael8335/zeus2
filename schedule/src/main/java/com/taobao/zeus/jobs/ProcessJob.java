@@ -262,7 +262,7 @@ public abstract class ProcessJob extends AbstractJob implements Job {
 			try {
 				process.destroy();
 				int pid=getProcessId();
-				Runtime.getRuntime().exec("kill "+pid);
+				Runtime.getRuntime().exec("kill -9 "+pid);
 			} catch (Exception e) {
 				log(e);
 			} finally{
