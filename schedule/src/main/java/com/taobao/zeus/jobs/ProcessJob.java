@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import com.taobao.zeus.jobs.sub.conf.ConfUtil;
 import com.taobao.zeus.jobs.sub.tool.CancelHadoopJob;
 import com.taobao.zeus.store.HierarchyProperties;
+import com.taobao.zeus.util.RunningJobKeys;
 /**
  * 通过操作系统创建进程Process的Job任务
  * @author zhoufang
@@ -42,7 +43,7 @@ public abstract class ProcessJob extends AbstractJob implements Job {
 	public abstract List<String> getCommandList();
 	
 	
-	private void buildHadoopConf(){
+	private void buildHadoopConf(String jobType){
 		File dir=new File(jobContext.getWorkDir()+File.separator+"hadoop_conf");
 		if(!dir.exists()){
 			dir.mkdirs();
@@ -63,7 +64,8 @@ public abstract class ProcessJob extends AbstractJob implements Job {
 				yarn.put(key.substring("yarn-site.".length()), jobContext.getProperties().getProperty(key));
 			}
 		}
-		if(!core.isEmpty()){
+		if(jobType!=null&&(jobType.equals("MapReduceJob")||jobType.equals("HiveJob")))
+		{
 			Configuration coreC=ConfUtil.getDefaultCoreSite();
 			for(String key:core.keySet()){
 				coreC.set(key, core.get(key));
@@ -75,11 +77,11 @@ public abstract class ProcessJob extends AbstractJob implements Job {
 				}
 				xml.createNewFile();
 				coreC.writeXml(new FileOutputStream(xml));
-			} catch (Exception e) {
+			} catch (Exception e) 
+			{
 				log.error("create file core-site.xml error",e);
 			}
-		}
-		if(!hdfs.isEmpty()){
+
 			Configuration hdfsC=ConfUtil.getDefaultHdfsSite();
 			for(String key:hdfs.keySet()){
 				hdfsC.set(key, hdfs.get(key));
@@ -94,8 +96,8 @@ public abstract class ProcessJob extends AbstractJob implements Job {
 			} catch (Exception e) {
 				log.error("create file hdfs-site.xml error",e);
 			}
-		}
-		if(!mapred.isEmpty()){
+		
+
 			Configuration mapredC=ConfUtil.getDefaultMapredSite();
 			for(String key:mapred.keySet()){
 				mapredC.set(key, mapred.get(key));
@@ -110,9 +112,6 @@ public abstract class ProcessJob extends AbstractJob implements Job {
 			} catch (Exception e) {
 				log.error("create file mapred-site.xml error",e);
 			}
-		}
-		
-		if(!yarn.isEmpty()){
 			Configuration yarnC=ConfUtil.getDefaultYarnSite();
 			for(String key:yarn.keySet()){
 				yarnC.set(key, mapred.get(key));
@@ -134,7 +133,7 @@ public abstract class ProcessJob extends AbstractJob implements Job {
 				+ConfUtil.getHadoopConfDir();
 		envMap.put("HADOOP_CONF_DIR", HADOOP_CONF_DIR);
 	}
-	private void buildHiveConf(){
+	private void buildHiveConf(String jobType){
 		File dir=new File(jobContext.getWorkDir()+File.separator+"hive_conf");
 		if(!dir.exists()){
 			dir.mkdirs();
@@ -145,7 +144,7 @@ public abstract class ProcessJob extends AbstractJob implements Job {
 				hive.put(key.substring("hive-site.".length()), jobContext.getProperties().getProperty(key));
 			}
 		}
-		if(!hive.isEmpty()){
+		if(jobType!=null&&jobType.equals("HiveJob")){
 			Configuration hiveC=ConfUtil.getDefaultCoreSite();
 			for(String key:hive.keySet()){
 				hiveC.set(key, hive.get(key));
@@ -171,9 +170,10 @@ public abstract class ProcessJob extends AbstractJob implements Job {
 	public Integer run() throws Exception{
 		
 		int exitCode=-999;
+		String jobType=jobContext.getProperties().getAllProperties().get(RunningJobKeys.JOB_RUN_TYPE);
 		
-		buildHadoopConf();
-		buildHiveConf();
+		buildHadoopConf(jobType);
+		buildHiveConf(jobType);
 		
 		//设置环境变量
 		for(String key:jobContext.getProperties().getAllProperties().keySet()){

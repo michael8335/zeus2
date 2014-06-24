@@ -8,6 +8,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,7 @@ import com.taobao.zeus.jobs.ProcessJob;
 import com.taobao.zeus.model.FileDescriptor;
 import com.taobao.zeus.store.FileManager;
 import com.taobao.zeus.util.PropertyKeys;
+import com.taobao.zeus.util.RunningJobKeys;
 
 /**
  * 添加重试功能，如果任务在10分钟内失败，则进行重试
@@ -37,6 +39,7 @@ public class HiveJob extends ProcessJob {
 		this.applicationContext = applicationContext;
 		fileManager = (FileManager) this.applicationContext
 				.getBean("fileManager");
+		jobContext.getProperties().setProperty(RunningJobKeys.JOB_RUN_TYPE, "HiveJob");
 		
 	}
 
