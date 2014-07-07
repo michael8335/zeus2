@@ -21,12 +21,13 @@ public class MapReduceMain {
 		if(f.exists()){
 			conf.addResource(f.toURI().toURL());
 		}else{
-			File core=new File(System.getenv("HADOOP_HOME")+File.separator+"conf"+File.separator+"core-site.xml");
+			File core=new File(System.getenv("HADOOP_HOME")+File.separator+"etc"+File.separator+"hadoop"+File.separator+"core-site.xml");
 			if(core.exists()){
 				conf.addResource(core.toURI().toURL());
 			}
 		}
-		conf.set("mapred.jar", jar);
+		//conf.set("mapred.jar", jar);
+		conf.set("mapreduce.job.jar", jar);
 		File target=new File(workDir+File.separator+"hadoop_conf"+File.separator+"core-site.xml");
 		if(!target.exists()){
 			target.mkdirs();

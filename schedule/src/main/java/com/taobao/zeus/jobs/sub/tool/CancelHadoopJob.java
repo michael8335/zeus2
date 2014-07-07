@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.taobao.zeus.jobs.JobContext;
 import com.taobao.zeus.jobs.ProcessJob;
+import com.taobao.zeus.util.JobUtils;
 
 /**
  * 扫描日志，揪出hadoop任务id，进行kill
@@ -34,15 +35,16 @@ public class CancelHadoopJob extends ProcessJob {
 			log = jobContext.getDebugHistory().getLog().getContent();
 		}
 		if (log != null) {
+			String hadoopCmd=JobUtils.getHadoopCmd(envMap);
 			String[] logs = log.split("\n");
 			for (String g : logs) {
 				String cmd = null;
 				if (g.contains("Running job: ")) {// mapreduce
 					String jobId = g.substring(g.indexOf("job_"));
-					cmd = "hadoop job -kill " + jobId;
+					cmd = hadoopCmd+" job -kill " + jobId;
 				} else if (g.contains("Starting Job =")) {// hive
 					String jobId = g.substring(g.lastIndexOf("job_"));
-					cmd = "hadoop job -kill " + jobId;
+					cmd = hadoopCmd+" job -kill " + jobId;
 				}
 				if (cmd != null) {
 					list.add(cmd);

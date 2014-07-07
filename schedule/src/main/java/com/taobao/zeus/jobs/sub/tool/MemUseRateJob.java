@@ -7,12 +7,17 @@ import java.util.regex.Pattern;
 import com.taobao.zeus.jobs.JobContext;
 import com.taobao.zeus.jobs.sub.ShellJob;
 import com.taobao.zeus.schedule.mvc.ScheduleInfoLog;
+import com.taobao.zeus.util.RunningJobKeys;
 
 public class MemUseRateJob extends ShellJob{
 
 	private double rate;
 	public MemUseRateJob(JobContext jobContext,double rate) {
 		super(jobContext,"free -m | grep buffers/cache");
+		/**
+		 * 添加一个表示是否为心跳的标示符
+		 */
+		jobContext.getProperties().getAllProperties().put(RunningJobKeys.JOB_RUN_TYPE, "MemUseRateJob");
 		this.rate=rate;
 	}
 	static Pattern pattern=Pattern.compile("\\d+");

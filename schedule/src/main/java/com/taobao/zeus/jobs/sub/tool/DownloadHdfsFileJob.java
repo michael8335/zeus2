@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.taobao.zeus.jobs.JobContext;
 import com.taobao.zeus.jobs.ProcessJob;
+import com.taobao.zeus.util.JobUtils;
 
 /**
  * 从HDFS文件系统下载到本地文件系统
@@ -27,8 +28,9 @@ public class DownloadHdfsFileJob extends ProcessJob {
 	
 	@Override
 	public List<String> getCommandList() {
+		String hadoopCmd=JobUtils.getHadoopCmd(envMap);
 		List<String> commands = new ArrayList<String>();
-		commands.add("hadoop fs -copyToLocal " + hdfsFilePath + " " + localPath);
+		commands.add(hadoopCmd+" fs -copyToLocal " + hdfsFilePath + " " + localPath);
 		return commands;
 	}
 

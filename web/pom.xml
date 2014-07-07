@@ -16,7 +16,7 @@
 		<java.encoding>UTF-8</java.encoding>
 		<jetty-version>6.1.22</jetty-version>
 		<gwt-version>2.5.0</gwt-version>
-		<local.highcharts>D:\PtMind\SVN\09_PtEngineV2\01_trunk\02_Develop\03_Code\01_Platform\01_Schedule\zeus\web\libs\highcharts-1.4.0.jar</local.highcharts>
+		<local.highcharts>/Users/fly/work/GitHub/zeus2/web/libs/highcharts-1.4.0.jar</local.highcharts>
 	</properties>
 
 	<name>Zeus Web服务</name>
@@ -99,7 +99,7 @@
 			<artifactId>highcharts</artifactId>
 			<version>1.4-0</version>
 			<scope>system</scope>
-			<systemPath>D:\PtMind\SVN\09_PtEngineV2\01_trunk\02_Develop\03_Code\01_Platform\01_Schedule\zeus\web\libs\highcharts-1.4.0.jar</systemPath>
+			<systemPath>/Users/fly/work/GitHub/zeus2/web/libs/highcharts-1.4.0.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>

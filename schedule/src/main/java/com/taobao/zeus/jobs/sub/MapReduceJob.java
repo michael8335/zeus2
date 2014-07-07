@@ -36,6 +36,7 @@ public class MapReduceJob extends JavaJob{
 		jobContext.getProperties().setProperty(RunningJobKeys.RUN_CLASSPATH, classpath+
 				File.pathSeparator+getSourcePathFromClass(MapReduceMain.class));
 		jobContext.getProperties().setProperty(RunningJobKeys.RUN_JAVA_MAIN_ARGS, main+" "+args);
+		jobContext.getProperties().setProperty(RunningJobKeys.JOB_RUN_TYPE, "MapReduceJob");
 		
 	}
 	

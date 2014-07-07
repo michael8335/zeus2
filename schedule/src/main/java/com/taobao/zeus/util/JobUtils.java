@@ -350,4 +350,14 @@ public class JobUtils {
 		}
 		return jobs;
 	}
+	
+	public static String getHadoopCmd(Map<String,String> evenMap){
+		StringBuilder cmd=new StringBuilder(64);
+		String hadoopHome=evenMap.get("HADOOP_HOME");
+		if(hadoopHome!=null){
+			cmd.append(hadoopHome).append("/bin/");
+		}
+		cmd.append("hadoop");
+		return cmd.toString();
+	}
 }

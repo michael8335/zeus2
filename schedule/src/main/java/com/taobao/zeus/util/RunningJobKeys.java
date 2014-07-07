@@ -41,4 +41,8 @@ public class RunningJobKeys {
 	 * 需要执行的odps文件路径
 	 */
 	public static final String RUN_ODPS_PATH="odps.localfile";
+	/**
+	 * 任务类型
+	 */
+	public static final String JOB_RUN_TYPE="job.jobtype";
 }

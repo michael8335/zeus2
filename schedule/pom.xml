@@ -80,15 +80,6 @@
 			<version>2.2.0</version>
 		</dependency>
 		
-		<dependency>
-			<groupId>jdk.tools</groupId>
-			<artifactId>jdk.tools</artifactId>
-			<version>1.6</version>
-			<scope>system</scope>
-			<systemPath>
-				${JAVA_HOME}/lib/tools.jar
-			</systemPath>
-		</dependency>
 		
 <!-- 		<dependency> -->
 <!-- 			<groupId>org.apache.hadoop</groupId> -->
@@ -225,7 +216,7 @@
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
-			<version>2.1</version>
+			<version>2.4</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-fileupload</groupId>
