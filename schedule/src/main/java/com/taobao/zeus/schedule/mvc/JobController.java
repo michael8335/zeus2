@@ -358,6 +358,7 @@ public class JobController extends Controller {
 		history.setIllustrate("依赖任务全部到位，开始执行");
 		history.setTriggerType(TriggerType.SCHEDULE);
 		history.setJobId(jobId);
+		history.setExecuteHost(jobDescriptor.getHost());
 		context.getJobHistoryManager().addJobHistory(history);
 		history = master.run(history);
 		if (history.getStatus() == Status.FAILED) {

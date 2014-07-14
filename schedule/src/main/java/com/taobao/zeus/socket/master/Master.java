@@ -2,6 +2,7 @@ package com.taobao.zeus.socket.master;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -134,7 +135,7 @@ public class Master {
 			for (MasterWorkerHolder worker : context.getWorkers().values()) {
 				HeartBeatInfo heart = worker.getHeart();
 				if (heart != null && heart.memRate != null
-						&& heart.memRate < 0.8 && host.equals(heart.host)) {
+						&& heart.memRate < 0.8 && Arrays.asList(host.split("\\,")).contains(heart.host)) {
 					if (selectWorker == null) {
 						selectWorker = worker;
 						selectMemRate = heart.memRate;
