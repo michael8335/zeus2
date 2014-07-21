@@ -99,7 +99,7 @@
 			<artifactId>highcharts</artifactId>
 			<version>1.4-0</version>
 			<scope>system</scope>
-			<systemPath>/Users/fly/work/GitHub/zeus2/web/libs/highcharts-1.4.0.jar</systemPath>
+			<systemPath>${local.highcharts}</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
