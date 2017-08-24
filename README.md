@@ -1,4 +1,4 @@
-Zeus2维护者：<a href="mailto:yangf.sky@gmail.com">杨飞</a>  
+Zeus维护者：<a href="mailto:yangf.sky@gmail.com">杨飞</a>  
 
 ##宙斯(zeus)是什么
 宙斯是一个完整的Hadoop的作业平台  
